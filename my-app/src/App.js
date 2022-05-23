@@ -5,6 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 import Login from './components/Login/Login';
+import Dashboard from './components/Dashboard/Dashboard';
+
 import React from 'react';
 
 function App() {
@@ -15,8 +17,8 @@ function App() {
       <div className="App">
         <HashRouter >
           <Routes>
-
             <Route exact path="/" element={<Login />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
           </Routes>
         </HashRouter >
       </div>

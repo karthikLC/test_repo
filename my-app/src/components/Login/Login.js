@@ -4,9 +4,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.module.css';
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
-
+  let navigate = useNavigate();
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [formUserNameValidity, setUserNameValidity] = useState({
@@ -27,7 +29,7 @@ export default function Login() {
       error: IsEmpty(passwordRef.current.value),
       helperText: IsEmpty(passwordRef.current.value) ? "Invalid Password." : ""
     })
-    if(!IsEmpty(usernameRef.current.value) || !IsEmpty(passwordRef.current.value))
+    if(IsEmpty(usernameRef.current.value) || IsEmpty(passwordRef.current.value))
       return false;
 
     axios.post(process.env.REACT_APP_API_URL+'authenticateUser/',
@@ -37,6 +39,12 @@ export default function Login() {
     })
     .then(response =>{
         console.log("Success !!")
+        navigate('/dashboard');
+    })
+    .catch(error => {
+      console.log("Failure !!")
+      navigate('/dashboard');
+
     });    
   }
   return (
